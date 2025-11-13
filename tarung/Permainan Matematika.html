@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<!-- saved from url=(0025)https://game.afifedu.com/ -->
+<html lang="id"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, shrink-to-fit=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#a8d8ff">
+    <meta name="format-detection" content="telephone=no">
+    <title>Permainan Matematika</title>
+    <link rel="icon" type="image/x-icon" href="https://game.afifedu.com/favicon.ico">
+    <link rel="stylesheet" href="./Permainan Matematika_files/styles.css">
+    
+    <!-- Preload critical images -->
+    <link rel="preload" as="image" href="https://game.afifedu.com/character.png">
+    <link rel="preload" as="image" href="./Permainan Matematika_files/icon_home.png">
+    <link rel="preload" as="image" href="./Permainan Matematika_files/icon_tarik.png">
+    <link rel="preload" as="image" href="./Permainan Matematika_files/icon_panjat.png">
+    <link rel="preload" as="image" href="./Permainan Matematika_files/icon_balap_karung.png">
+    <link rel="preload" as="image" href="./Permainan Matematika_files/tiang.png">
+    <link rel="preload" as="image" href="./Permainan Matematika_files/standleft.png">
+    <link rel="preload" as="image" href="./Permainan Matematika_files/standright.png">
+    <link rel="preload" as="image" href="./Permainan Matematika_files/climbleft.png">
+    <link rel="preload" as="image" href="./Permainan Matematika_files/climbright.png">
+    <link rel="preload" as="image" href="./Permainan Matematika_files/track.png">
+    <link rel="preload" as="image" href="./Permainan Matematika_files/blue_stand.png">
+    <link rel="preload" as="image" href="./Permainan Matematika_files/blue_hop.png">
+    <link rel="preload" as="image" href="./Permainan Matematika_files/red_stand.png">
+    <link rel="preload" as="image" href="./Permainan Matematika_files/red_hop.png">
+</head>
+<body>
+    <!-- Fullscreen Button -->
+    <button id="fullscreenBtn" class="fullscreen-btn" onclick="toggleFullscreen()" title="Toggle Fullscreen">
+        <svg class="fullscreen-icon expand" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+        </svg>
+        <svg class="fullscreen-icon collapse" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"></path>
+        </svg>
+    </button>
+
+    <!-- Home Button -->
+    <button id="homeBtn" class="home-btn" onclick="backToGameTypeMenu()" title="Menu Utama" style="display: none;">
+        <img src="./Permainan Matematika_files/icon_home.png" alt="Home" class="home-icon">
+    </button>
+
+    <!-- Menu Game Mode Selection (Tarik Tambang / Panjat Pinang) -->
+    <div id="gameTypeMenu" class="menu-screen" style="display: flex;">
+        <div class="menu-container">
+            <h1 class="menu-title">Permainan Matematika</h1>
+            <p class="menu-subtitle">Pilih Tema Permainan</p>
+            <div class="menu-buttons">
+                <button class="menu-btn game-type-btn tarik-tambang" onclick="selectGameType(&#39;tarik-tambang&#39;)">
+                    <img src="./Permainan Matematika_files/icon_tarik.png" alt="Tarik Tambang" class="menu-icon">
+                    <div class="game-type-text">
+                        <span class="game-type-title">Tarik Tambang</span>
+                        <span class="game-type-subtitle">Inspired by Pak Guru Saloom</span>
+                    </div>
+                </button>
+                <button class="menu-btn game-type-btn panjat-pinang" onclick="selectGameType(&#39;panjat-pinang&#39;)">
+                    <img src="./Permainan Matematika_files/icon_panjat.png" alt="Panjat Pinang" class="menu-icon">
+                    <span>Panjat Pinang</span>
+                </button>
+                <button class="menu-btn game-type-btn balap-karung" onclick="selectGameType(&#39;balap-karung&#39;)">
+                    <img src="./Permainan Matematika_files/icon_balap_karung.png" alt="Balap Karung" class="menu-icon">
+                    <span>Balap Karung</span>
+                </button>
+            </div>
+        </div>
+        <div class="copyright-footer">
+            <p>© AfifEdu 2025</p>
+        </div>
+    </div>
+
+    <!-- Menu Math Mode Selection for Tarik Tambang -->
+    <div id="mathModeMenuTarikTambang" class="menu-screen" style="display: none;">
+        <div class="menu-container">
+            <h1 class="menu-title">Tarik Tambang Matematika</h1>
+            <p class="menu-subtitle">Pilih Jenis Operasi</p>
+            <div class="menu-buttons">
+                <button class="menu-btn" onclick="selectMathMode(&#39;addition&#39;)">
+                    ➕ Penjumlahan
+                </button>
+                <button class="menu-btn" onclick="selectMathMode(&#39;subtraction&#39;)">
+                    ➖ Pengurangan
+                </button>
+                <button class="menu-btn" onclick="selectMathMode(&#39;multiplication&#39;)">
+                    ✖️ Perkalian
+                </button>
+                <button class="menu-btn" onclick="selectMathMode(&#39;division&#39;)">
+                    ➗ Pembagian
+                </button>
+            </div>
+            <button class="back-btn" onclick="backToGameTypeMenu()">← Kembali</button>
+        </div>
+    </div>
+
+    <!-- Menu Math Mode Selection for Panjat Pinang -->
+    <div id="mathModeMenuPanjatPinang" class="menu-screen" style="display: none;">
+        <div class="menu-container">
+            <h1 class="menu-title">Panjat Pinang Matematika</h1>
+            <p class="menu-subtitle">Pilih Jenis Operasi</p>
+            <div class="menu-buttons">
+                <button class="menu-btn" onclick="selectMathMode(&#39;addition&#39;)">
+                    ➕ Penjumlahan
+                </button>
+                <button class="menu-btn" onclick="selectMathMode(&#39;subtraction&#39;)">
+                    ➖ Pengurangan
+                </button>
+                <button class="menu-btn" onclick="selectMathMode(&#39;multiplication&#39;)">
+                    ✖️ Perkalian
+                </button>
+                <button class="menu-btn" onclick="selectMathMode(&#39;division&#39;)">
+                    ➗ Pembagian
+                </button>
+            </div>
+            <button class="back-btn" onclick="backToGameTypeMenu()">← Kembali</button>
+        </div>
+    </div>
+
+    <!-- Menu Math Mode Selection for Balap Karung -->
+    <div id="mathModeMenuBalapKarung" class="menu-screen" style="display: none;">
+        <div class="menu-container">
+            <h1 class="menu-title">Balap Karung Matematika</h1>
+            <p class="menu-subtitle">Pilih Jenis Operasi</p>
+            <div class="menu-buttons">
+                <button class="menu-btn" onclick="selectMathMode(&#39;addition&#39;)">
+                    ➕ Penjumlahan
+                </button>
+                <button class="menu-btn" onclick="selectMathMode(&#39;subtraction&#39;)">
+                    ➖ Pengurangan
+                </button>
+                <button class="menu-btn" onclick="selectMathMode(&#39;multiplication&#39;)">
+                    ✖️ Perkalian
+                </button>
+                <button class="menu-btn" onclick="selectMathMode(&#39;division&#39;)">
+                    ➗ Pembagian
+                </button>
+            </div>
+            <button class="back-btn" onclick="backToGameTypeMenu()">← Kembali</button>
+        </div>
+    </div>
+
+    <!-- Menu Level Selection - Addition -->
+    <div id="levelMenuAddition" class="menu-screen" style="display: none;">
+        <div class="menu-container compact">
+            <h1 class="menu-title">Pilih Level Kesulitan</h1>
+            <p class="menu-subtitle">Mode: Penjumlahan</p>
+            <div class="menu-buttons">
+                <button class="menu-btn level-btn beginner" onclick="selectLevel(&#39;beginner&#39;)">
+                    <span class="level-icon">⭐</span>
+                    <span class="level-name">Beginner</span>
+                    <span class="level-desc">1 Digit + 1 Digit</span>
+                </button>
+                <button class="menu-btn level-btn amateur" onclick="selectLevel(&#39;amateur&#39;)">
+                    <span class="level-icon">⭐⭐</span>
+                    <span class="level-name">Amateur</span>
+                    <span class="level-desc">1 Digit + 2 Digit (Mixed)</span>
+                </button>
+                <button class="menu-btn level-btn pro" onclick="selectLevel(&#39;pro&#39;)">
+                    <span class="level-icon">⭐⭐⭐</span>
+                    <span class="level-name">Pro</span>
+                    <span class="level-desc">2 Digit + 2 Digit</span>
+                </button>
+            </div>
+            <button class="back-btn" onclick="backToMainMenu()">← Kembali</button>
+        </div>
+    </div>
+
+    <!-- Menu Level Selection - Subtraction -->
+    <div id="levelMenuSubtraction" class="menu-screen" style="display: none;">
+        <div class="menu-container compact">
+            <h1 class="menu-title">Pilih Level Kesulitan</h1>
+            <p class="menu-subtitle">Mode: Pengurangan</p>
+            <div class="menu-buttons">
+                <button class="menu-btn level-btn beginner" onclick="selectLevel(&#39;beginner&#39;)">
+                    <span class="level-icon">⭐</span>
+                    <span class="level-name">Beginner</span>
+                    <span class="level-desc">1 Digit - 1 Digit</span>
+                </button>
+                <button class="menu-btn level-btn amateur" onclick="selectLevel(&#39;amateur&#39;)">
+                    <span class="level-icon">⭐⭐</span>
+                    <span class="level-name">Amateur</span>
+                    <span class="level-desc">2 Digit - 1 Digit (Mixed)</span>
+                </button>
+                <button class="menu-btn level-btn pro" onclick="selectLevel(&#39;pro&#39;)">
+                    <span class="level-icon">⭐⭐⭐</span>
+                    <span class="level-name">Pro</span>
+                    <span class="level-desc">2 Digit - 2 Digit</span>
+                </button>
+            </div>
+            <button class="back-btn" onclick="backToMainMenu()">← Kembali</button>
+        </div>
+    </div>
+
+    <!-- Menu Level Selection - Multiplication -->
+    <div id="levelMenuMultiplication" class="menu-screen" style="display: none;">
+        <div class="menu-container compact">
+            <h1 class="menu-title">Pilih Level Kesulitan</h1>
+            <p class="menu-subtitle">Mode: Perkalian</p>
+            <div class="menu-buttons">
+                <button class="menu-btn level-btn beginner" onclick="selectLevel(&#39;beginner&#39;)">
+                    <span class="level-icon">⭐</span>
+                    <span class="level-name">Beginner</span>
+                    <span class="level-desc">1 Digit × 1 Digit</span>
+                </button>
+                <button class="menu-btn level-btn amateur" onclick="selectLevel(&#39;amateur&#39;)">
+                    <span class="level-icon">⭐⭐</span>
+                    <span class="level-name">Amateur</span>
+                    <span class="level-desc">1 Digit × 2 Digit</span>
+                </button>
+                <button class="menu-btn level-btn pro" onclick="selectLevel(&#39;pro&#39;)">
+                    <span class="level-icon">⭐⭐⭐</span>
+                    <span class="level-name">Pro</span>
+                    <span class="level-desc">2 Digit × 2 Digit</span>
+                </button>
+            </div>
+            <button class="back-btn" onclick="backToMainMenu()">← Kembali</button>
+        </div>
+    </div>
+
+    <!-- Menu Level Selection - Division -->
+    <div id="levelMenuDivision" class="menu-screen" style="display: none;">
+        <div class="menu-container compact">
+            <h1 class="menu-title">Pilih Level Kesulitan</h1>
+            <p class="menu-subtitle">Mode: Pembagian</p>
+            <div class="menu-buttons">
+                <button class="menu-btn level-btn beginner" onclick="selectLevel(&#39;beginner&#39;)">
+                    <span class="level-icon">⭐</span>
+                    <span class="level-name">Beginner</span>
+                    <span class="level-desc">Bulat (1-20 ÷ 1-5)</span>
+                </button>
+                <button class="menu-btn level-btn amateur" onclick="selectLevel(&#39;amateur&#39;)">
+                    <span class="level-icon">⭐⭐</span>
+                    <span class="level-name">Amateur</span>
+                    <span class="level-desc">Bulat (10-99 ÷ 1-9)</span>
+                </button>
+                <button class="menu-btn level-btn pro" onclick="selectLevel(&#39;pro&#39;)">
+                    <span class="level-icon">⭐⭐⭐</span>
+                    <span class="level-name">Pro</span>
+                    <span class="level-desc">Bulat / Desimal (10-99 ÷ 2-10)</span>
+                </button>
+            </div>
+            <button class="back-btn" onclick="backToMainMenu()">← Kembali</button>
+        </div>
+    </div>
+
+    <!-- Game Screen - Tarik Tambang -->
+    <div id="gameScreenTarikTambang" class="game-container" style="display: none;">
+        <!-- Bagian Pemain Kiri -->
+        <div class="player-section left-player">
+            <div class="question-box">1 + 8 = ?</div>
+            <div class="answer-box"></div>
+            <div class="keypad">
+                <div class="keypad-row">
+                    <button class="number-btn">1</button>
+                    <button class="number-btn">2</button>
+                    <button class="number-btn">3</button>
+                </div>
+                <div class="keypad-row">
+                    <button class="number-btn">4</button>
+                    <button class="number-btn">5</button>
+                    <button class="number-btn">6</button>
+                </div>
+                <div class="keypad-row">
+                    <button class="number-btn">7</button>
+                    <button class="number-btn">8</button>
+                    <button class="number-btn">9</button>
+                </div>
+                <div class="keypad-row keypad-row-4">
+                    <button class="minus-btn">−</button>
+                    <button class="decimal-btn">.</button>
+                    <button class="number-btn">0</button>
+                    <button class="clear-btn">C</button>
+                    <button class="go-btn">Go</button>
+                </div>
+                <div class="keypad-row keypad-row-5">
+                    <button class="go-btn-alt">Go</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bagian Tengah -->
+        <div class="center-section">
+            <h1>Tarik Tambang Matematika</h1>
+            <div class="game-field">
+                <div class="tug-of-war-scene"></div>
+                <div class="center-line"></div>
+            </div>
+            <p class="instruction">Jawab soal untuk menarik tali!</p>
+        </div>
+
+        <!-- Bagian Pemain Kanan -->
+        <div class="player-section right-player">
+            <div class="question-box">9 + 4 = ?</div>
+            <div class="answer-box"></div>
+            <div class="keypad">
+                <div class="keypad-row">
+                    <button class="number-btn">1</button>
+                    <button class="number-btn">2</button>
+                    <button class="number-btn">3</button>
+                </div>
+                <div class="keypad-row">
+                    <button class="number-btn">4</button>
+                    <button class="number-btn">5</button>
+                    <button class="number-btn">6</button>
+                </div>
+                <div class="keypad-row">
+                    <button class="number-btn">7</button>
+                    <button class="number-btn">8</button>
+                    <button class="number-btn">9</button>
+                </div>
+                <div class="keypad-row keypad-row-4">
+                    <button class="minus-btn">−</button>
+                    <button class="decimal-btn">.</button>
+                    <button class="number-btn">0</button>
+                    <button class="clear-btn">C</button>
+                    <button class="go-btn">Go</button>
+                </div>
+                <div class="keypad-row keypad-row-5">
+                    <button class="go-btn-alt">Go</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Screen - Panjat Pinang -->
+    <div id="gameScreenPanjatPinang" class="game-container panjat-pinang-game" style="display: none;">
+        <!-- Bagian Pemain Kiri -->
+        <div class="player-section left-player">
+            <div class="question-box">1 + 8 = ?</div>
+            <div class="answer-box"></div>
+            <div class="keypad">
+                <div class="keypad-row">
+                    <button class="number-btn">1</button>
+                    <button class="number-btn">2</button>
+                    <button class="number-btn">3</button>
+                </div>
+                <div class="keypad-row">
+                    <button class="number-btn">4</button>
+                    <button class="number-btn">5</button>
+                    <button class="number-btn">6</button>
+                </div>
+                <div class="keypad-row">
+                    <button class="number-btn">7</button>
+                    <button class="number-btn">8</button>
+                    <button class="number-btn">9</button>
+                </div>
+                <div class="keypad-row keypad-row-4">
+                    <button class="minus-btn">−</button>
+                    <button class="decimal-btn">.</button>
+                    <button class="number-btn">0</button>
+                    <button class="clear-btn">C</button>
+                    <button class="go-btn">Go</button>
+                </div>
+                <div class="keypad-row keypad-row-5">
+                    <button class="go-btn-alt">Go</button>
+                </div>
+            </div>
+            <div class="score-indicator">Benar: <span class="score-value">0/7</span></div>
+        </div>
+
+        <!-- Bagian Tengah -->
+        <div class="center-section panjat-pinang-center">
+            <h1>Panjat Pinang Matematika</h1>
+            <div class="game-field panjat-pinang-field">
+                <!-- Tiang Kiri -->
+                <div class="pole-container left-pole">
+                    <img src="./Permainan Matematika_files/tiang.png" alt="Tiang Pinang" class="pole-image">
+                    <div class="climber-container left-climber">
+                        <img src="./Permainan Matematika_files/standleft.png" alt="Pemain Kiri" class="climber-image stand">
+                        <img src="./Permainan Matematika_files/climbleft.png" alt="Pemain Kiri Memanjat" class="climber-image climb" style="display: none;">
+                    </div>
+                </div>
+                
+                <!-- Tiang Kanan -->
+                <div class="pole-container right-pole">
+                    <img src="./Permainan Matematika_files/tiang.png" alt="Tiang Pinang" class="pole-image">
+                    <div class="climber-container right-climber">
+                        <img src="./Permainan Matematika_files/standright.png" alt="Pemain Kanan" class="climber-image stand">
+                        <img src="./Permainan Matematika_files/climbright.png" alt="Pemain Kanan Memanjat" class="climber-image climb" style="display: none;">
+                    </div>
+                </div>
+            </div>
+            <p class="instruction">Jawab soal untuk memanjat tiang! (7 jawaban benar untuk menang)</p>
+        </div>
+
+        <!-- Bagian Pemain Kanan -->
+        <div class="player-section right-player">
+            <div class="question-box">9 + 4 = ?</div>
+            <div class="answer-box"></div>
+            <div class="keypad">
+                <div class="keypad-row">
+                    <button class="number-btn">1</button>
+                    <button class="number-btn">2</button>
+                    <button class="number-btn">3</button>
+                </div>
+                <div class="keypad-row">
+                    <button class="number-btn">4</button>
+                    <button class="number-btn">5</button>
+                    <button class="number-btn">6</button>
+                </div>
+                <div class="keypad-row">
+                    <button class="number-btn">7</button>
+                    <button class="number-btn">8</button>
+                    <button class="number-btn">9</button>
+                </div>
+                <div class="keypad-row keypad-row-4">
+                    <button class="minus-btn">−</button>
+                    <button class="decimal-btn">.</button>
+                    <button class="number-btn">0</button>
+                    <button class="clear-btn">C</button>
+                    <button class="go-btn">Go</button>
+                </div>
+                <div class="keypad-row keypad-row-5">
+                    <button class="go-btn-alt">Go</button>
+                </div>
+            </div>
+            <div class="score-indicator">Benar: <span class="score-value">0/7</span></div>
+        </div>
+    </div>
+
+    <!-- Game Screen - Balap Karung -->
+    <div id="gameScreenBalapKarung" class="game-container balap-karung-game" style="display: none;">
+        <!-- Bagian Pemain Kiri -->
+        <div class="player-section left-player">
+            <div class="question-box">1 + 8 = ?</div>
+            <div class="answer-box"></div>
+            <div class="keypad">
+                <div class="keypad-row">
+                    <button class="number-btn">1</button>
+                    <button class="number-btn">2</button>
+                    <button class="number-btn">3</button>
+                </div>
+                <div class="keypad-row">
+                    <button class="number-btn">4</button>
+                    <button class="number-btn">5</button>
+                    <button class="number-btn">6</button>
+                </div>
+                <div class="keypad-row">
+                    <button class="number-btn">7</button>
+                    <button class="number-btn">8</button>
+                    <button class="number-btn">9</button>
+                </div>
+                <div class="keypad-row keypad-row-4">
+                    <button class="minus-btn">−</button>
+                    <button class="decimal-btn">.</button>
+                    <button class="number-btn">0</button>
+                    <button class="clear-btn">C</button>
+                    <button class="go-btn">Go</button>
+                </div>
+                <div class="keypad-row keypad-row-5">
+                    <button class="go-btn-alt">Go</button>
+                </div>
+            </div>
+            <div class="score-indicator">Posisi: <span class="score-value">0/10</span></div>
+        </div>
+
+        <!-- Bagian Tengah -->
+        <div class="center-section balap-karung-center">
+            <h1>Balap Karung Matematika</h1>
+            <div class="game-field balap-karung-field">
+                <!-- Track -->
+                <div class="race-track">
+                    <img src="./Permainan Matematika_files/track.png" alt="Track" class="track-image">
+                    
+                    <!-- Racer Kiri -->
+                    <div class="racer-container left-racer">
+                        <img src="./Permainan Matematika_files/blue_stand.png" alt="Pemain Kiri" class="racer-image stand">
+                        <img src="./Permainan Matematika_files/blue_hop.png" alt="Pemain Kiri Hop" class="racer-image hop" style="display: none;">
+                    </div>
+                    
+                    <!-- Racer Kanan -->
+                    <div class="racer-container right-racer">
+                        <img src="./Permainan Matematika_files/red_stand.png" alt="Pemain Kanan" class="racer-image stand">
+                        <img src="./Permainan Matematika_files/red_hop.png" alt="Pemain Kanan Hop" class="racer-image hop" style="display: none;">
+                    </div>
+                </div>
+            </div>
+            <p class="instruction">Jawab soal untuk melompat maju! (10 lompatan untuk menang)</p>
+        </div>
+
+        <!-- Bagian Pemain Kanan -->
+        <div class="player-section right-player">
+            <div class="question-box">9 + 4 = ?</div>
+            <div class="answer-box"></div>
+            <div class="keypad">
+                <div class="keypad-row">
+                    <button class="number-btn">1</button>
+                    <button class="number-btn">2</button>
+                    <button class="number-btn">3</button>
+                </div>
+                <div class="keypad-row">
+                    <button class="number-btn">4</button>
+                    <button class="number-btn">5</button>
+                    <button class="number-btn">6</button>
+                </div>
+                <div class="keypad-row">
+                    <button class="number-btn">7</button>
+                    <button class="number-btn">8</button>
+                    <button class="number-btn">9</button>
+                </div>
+                <div class="keypad-row keypad-row-4">
+                    <button class="minus-btn">−</button>
+                    <button class="decimal-btn">.</button>
+                    <button class="number-btn">0</button>
+                    <button class="clear-btn">C</button>
+                    <button class="go-btn">Go</button>
+                </div>
+                <div class="keypad-row keypad-row-5">
+                    <button class="go-btn-alt">Go</button>
+                </div>
+            </div>
+            <div class="score-indicator">Posisi: <span class="score-value">0/10</span></div>
+        </div>
+    </div>
+
+    <!-- Modal Pemenang -->
+    <div id="winnerModal" class="modal">
+        <div class="modal-content">
+            <h2 id="winnerText">🎉 Pemain Menang! 🎉</h2>
+            <p id="winnerMessage">Selamat! Anda berhasil menarik tali ke garis akhir!</p>
+            <button class="play-again-btn" onclick="closeModal()">Main Lagi</button>
+        </div>
+    </div>
+
+    <!-- Countdown Overlay -->
+    <div id="countdownOverlay" class="countdown-overlay">
+        <div class="countdown-content">
+            <div id="countdownNumber" class="countdown-number">3</div>
+            <div id="countdownText" class="countdown-text">Bersiap...</div>
+        </div>
+    </div>
+
+    <script src="./Permainan Matematika_files/script.js"></script>
+    
+    <!-- Register Service Worker for Caching -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./service-worker.js')
+                    .then(registration => {
+                        console.log('✅ Service Worker registered successfully:', registration.scope);
+                    })
+                    .catch(error => {
+                        console.error('❌ Service Worker registration failed:', error);
+                    });
+            });
+        }
+    </script>
+
+
+</body></html>
